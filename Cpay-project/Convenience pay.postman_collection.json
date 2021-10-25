@@ -1,0 +1,1141 @@
+{
+	"info": {
+		"_postman_id": "737cefba-07c9-4600-9953-666a89e4de77",
+		"name": "Convenience pay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "5050:auth",
+			"item": [
+				{
+					"name": "oauth",
+					"item": [
+						{
+							"name": "CP_AUTHORITY",
+							"item": [
+								{
+									"name": "/oauth/token - password",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);\r",
+													"pm.environment.set(\"cpay-bearer-token\", jsonData.access_token);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "username",
+													"value": "unipet",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "thisissecret",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "username",
+													"value": "{{adminEmail}}",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "{{adminPassword}}",
+													"type": "text"
+												},
+												{
+													"key": "grant_type",
+													"value": "password",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{cpay-gateway-base-url-auth}}oauth/token",
+											"host": [
+												"{{cpay-gateway-base-url-auth}}oauth"
+											],
+											"path": [
+												"token"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "FLEET_CUSTOMER",
+							"item": [
+								{
+									"name": "/oauth/token - password",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(responseBody);\r",
+													"pm.environment.set(\"cpay-bearer-token\", jsonData.access_token);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "username",
+													"value": "unipet",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "thisissecret",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "username",
+													"value": "{{customerEmail}}",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "{{customerPassword}}",
+													"type": "text"
+												},
+												{
+													"key": "grant_type",
+													"value": "password",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{cpay-gateway-base-url-auth}}oauth/token",
+											"host": [
+												"{{cpay-gateway-base-url-auth}}oauth"
+											],
+											"path": [
+												"token"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "/oauth/logout",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"     pm.environment.set(\"cpay-bearer-token\", \"\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{cpay-bearer-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{cpay-gateway-base-url-auth}}oauth/logout",
+									"host": [
+										"{{cpay-gateway-base-url-auth}}oauth"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "5052:customer",
+			"item": [
+				{
+					"name": "registration",
+					"item": [
+						{
+							"name": "registration",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"create customer registration request successful\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.unipet.v1.0+json",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.unipet.v1.0+json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"test02\",\r\n    \"email\": \"test01@yopmail.com\",\r\n    \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\r\n    \"vatRegistrationNumber\": \"VRN 240903001\",\r\n    \"fleetSize\": 5,\r\n    \"totalCards\": 3,\r\n    \"contactPersonFirstName\": \"FN 240903001\",\r\n    \"contactPersonLastName\": \"LN 240903001\",\r\n    \"contactPersonEmail\": \"cea240903002@yopmail.com\",\r\n    \"phoneNumber1\": \"1868-8974564\",\r\n    \"phoneNumber2\": \"\",\r\n    \"nationalId\": \"789532546654\",\r\n    \"facebookAccount\": null,\r\n    \"instagramAccount\": null,\r\n    \"linkedinAccount\": null,\r\n    \"documents\": [\r\n        {\r\n            \"fileName\": \"Business Registration.jpg\",\r\n            \"filePath\": \"customer-document/Business Registration.jpg\",\r\n            \"type\": \"article\"\r\n        },\r\n        {\r\n            \"fileName\": \"Proof of Address.jpg\",\r\n            \"filePath\": \"customer-document/Proof of Address.jpg\",\r\n            \"type\": \"proof\"\r\n        }\r\n    ],\r\n    \"firstFile\": [\r\n        {\r\n            \"fileName\": \"Business Registration.jpg\",\r\n            \"filePath\": \"customer-document/Business Registration.jpg\",\r\n            \"type\": \"article\"\r\n        }\r\n    ],\r\n    \"secondFile\": null,\r\n    \"thirdFile\": [\r\n        {\r\n            \"fileName\": \"Proof of Address.jpg\",\r\n            \"filePath\": \"customer-document/Proof of Address.jpg\",\r\n            \"type\": \"proof\"\r\n        }\r\n    ],\r\n    \"fourthFile\": null,\r\n    \"addressLine1\": \"Mirpur-1, Dhaka\",\r\n    \"addressLine2\": null,\r\n    \"zipCode\": null,\r\n    \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\r\n    \"city\": \"Woodland\",\r\n    \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\r\n    \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\r\n    \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\r\n    \"bankAccountNumber\": \"4008008000800\",\r\n    \"termsAndCondition\": true,\r\n    \"bankName\": \"The Central Bank of Trinidad and Tobago\",\r\n    \"branchName\": \"Port of Spain\",\r\n    \"type\": \"FLEET_CUSTOMER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cpay-gateway-base-url-customer}}registrations",
+									"host": [
+										"{{cpay-gateway-base-url-customer}}registrations"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "registration",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/vnd.unipet.v1.0+json",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/vnd.unipet.v1.0+json",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Rijvi Ahmed\",\r\n    \"email\": \"RijviAhmed@yopmail.com\",\r\n    \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\r\n    \"vatRegistrationNumber\": \"VRN 240903001\",\r\n    \"fleetSize\": 5,\r\n    \"totalCards\": 3,\r\n    \"contactPersonFirstName\": \"FN 240903001\",\r\n    \"contactPersonLastName\": \"LN 240903001\",\r\n    \"contactPersonEmail\": \"cea240903002@yopmail.com\",\r\n    \"phoneNumber1\": \"1868-8974564\",\r\n    \"phoneNumber2\": \"\",\r\n    \"nationalId\": \"789532546654\",\r\n    \"facebookAccount\": null,\r\n    \"instagramAccount\": null,\r\n    \"linkedinAccount\": null,\r\n    \"documents\": [\r\n        {\r\n            \"fileName\": \"Business Registration.jpg\",\r\n            \"filePath\": \"customer-document/Business Registration.jpg\",\r\n            \"type\": \"article\"\r\n        },\r\n        {\r\n            \"fileName\": \"Proof of Address.jpg\",\r\n            \"filePath\": \"customer-document/Proof of Address.jpg\",\r\n            \"type\": \"proof\"\r\n        }\r\n    ],\r\n    \"firstFile\": [\r\n        {\r\n            \"fileName\": \"Business Registration.jpg\",\r\n            \"filePath\": \"customer-document/Business Registration.jpg\",\r\n            \"type\": \"article\"\r\n        }\r\n    ],\r\n    \"secondFile\": null,\r\n    \"thirdFile\": [\r\n        {\r\n            \"fileName\": \"Proof of Address.jpg\",\r\n            \"filePath\": \"customer-document/Proof of Address.jpg\",\r\n            \"type\": \"proof\"\r\n        }\r\n    ],\r\n    \"fourthFile\": null,\r\n    \"addressLine1\": \"Mirpur-1, Dhaka\",\r\n    \"addressLine2\": null,\r\n    \"zipCode\": null,\r\n    \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\r\n    \"city\": \"Woodland\",\r\n    \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\r\n    \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\r\n    \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\r\n    \"bankAccountNumber\": \"4008008000800\",\r\n    \"termsAndCondition\": true,\r\n    \"bankName\": \"The Central Bank of Trinidad and Tobago\",\r\n    \"branchName\": \"Port of Spain\",\r\n    \"type\": \"FLEET_CUSTOMER\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{cpay-gateway-base-url-customer}}registrations",
+											"host": [
+												"{{cpay-gateway-base-url-customer}}registrations"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "0"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 Oct 2021 11:54:53 GMT"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "get registration",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET request successful\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"set customer 'id' as environmentVariable\", function () {\r",
+											"    bodyData = JSON.parse(responseBody);\r",
+											"    customer_id = bodyData[0].id;\r",
+											"    pm.environment.set(\"customer_id\", customer_id);\r",
+											"    console.log(\"customer_id :\"+customer_id);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.unipet.v1.0+json",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.unipet.v1.0+json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{cpay-gateway-base-url-customer}}registrations",
+									"host": [
+										"{{cpay-gateway-base-url-customer}}registrations"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "get registration",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/vnd.unipet.v1.0+json",
+												"type": "text",
+												"disabled": true
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/vnd.unipet.v1.0+json",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"url": {
+											"raw": "{{cpay-gateway-base-url-customer}}registrations",
+											"host": [
+												"{{cpay-gateway-base-url-customer}}registrations"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "transfer-encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 Oct 2021 11:55:07 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": \"d20a8e90-61dd-4d1d-9144-af0fe24ebe34\",\n        \"code\": \"005-F000685\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Rijvi Ahmed\",\n        \"email\": \"RijviAhmed@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"34245a0a-0d9d-4176-91ab-d79a1ca026dd\",\n        \"code\": \"005-F000683\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay15@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"6402d9fb-d409-4e41-83ae-3546242dd432\",\n        \"code\": \"005-F000682\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay14@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"7a47db86-a114-4258-85f1-be7fc422a270\",\n        \"code\": \"005-F000677\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay09@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 100,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"33ba4612-a8d6-49da-88ab-95da97142c74\",\n        \"code\": \"005-F000681\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay13@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"20ccd07f-a5d2-4909-99b7-a2c5ddb3fb6c\",\n        \"code\": \"005-F000676\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay06@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"bd3d09ef-b4aa-44f3-886b-61e11ba831ab\",\n        \"code\": \"005-F000675\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay05@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"8f7fe3c5-02b3-4303-b04c-0959ac9d9760\",\n        \"code\": \"005-F000672\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay03@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"bef1e604-1122-46bd-a03c-24071c99ea15\",\n        \"code\": \"005-F000669\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"22c21277-385f-4829-9ba2-54b69b80faae\",\n        \"code\": \"005-F000668\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Rijvi\",\n        \"email\": \"rijvi20@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"00b98f3d-9f94-4e02-bde1-cc3fa906955b\",\n        \"code\": \"005-F000666\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Akash\",\n        \"email\": \"akash18@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"76fb0da1-99b6-44c3-9d5d-2410ed40dcad\",\n        \"code\": \"005-F000665\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"bs test\",\n        \"email\": \"bstest23@yopmail.com\",\n        \"phoneNumber1\": \"1868-5464564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"54654645\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"test\",\n        \"contactPersonLastName\": \"test\",\n        \"contactPersonEmail\": \"bstest023@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3c0a40d9-f1a3-4b4d-be82-28ae3f4f52db\",\n        \"industryName\": \"Accommodation and Food Services\",\n        \"vatRegistrationNumber\": \"345345345\",\n        \"bankId\": null,\n        \"branchId\": null,\n        \"bankAccountNumber\": null,\n        \"documents\": [\n            {\n                \"fileName\": \"Screenshot 2021-10-11 at 6.17.12 PM.png\",\n                \"filePath\": \"customer-document/Screenshot 2021-10-11 at 6.17.12 PM.png\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"Screenshot 2021-10-11 at 6.17.12 PM.png\",\n                \"filePath\": \"customer-document/Screenshot 2021-10-11 at 6.17.12 PM.png\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 5\n    },\n    {\n        \"id\": \"3b0c0d42-cfaf-4101-8d48-784c266e643e\",\n        \"code\": \"005-F000661\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Akash\",\n        \"email\": \"akash18@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"61390a34-614b-48a1-bba1-48652ec03968\",\n        \"code\": \"005-F000660\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Akash\",\n        \"email\": \"akash18@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"538a0ea1-c071-4cb9-bbe5-cceaaaaa3031\",\n        \"code\": \"005-F000659\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"51040927-b37d-4e1a-b26f-59cfa3362fab\",\n        \"code\": \"005-F000657\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Rijvi\",\n        \"email\": \"akash18@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"96f03b01-839e-4211-927f-0dbcb83f0c11\",\n        \"code\": \"005-F000643\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"API_GeneratedCustomer1_425\",\n        \"email\": \"apigencustomer1314@yopmail.com\",\n        \"phoneNumber1\": \"01674646008\",\n        \"phoneNumber2\": \"01674646008\",\n        \"nationalId\": null,\n        \"addressLine1\": \"Api_addressLine1\",\n        \"addressLine2\": \"Api_addressLine2\",\n        \"contactPersonFirstName\": \"API Generated\",\n        \"contactPersonLastName\": \"Contact1\",\n        \"contactPersonEmail\": \"apigencontact1512@yopmail.com\",\n        \"city\": \"Soweto\",\n        \"cityId\": \"c645f0af-90d0-42f8-b1ba-35d3d584ca82\",\n        \"stateId\": \"7d63e0df-f476-4ba5-af7b-8af08201518e\",\n        \"zipCode\": \"1207\",\n        \"country\": \"Trinidad and Tobago\",\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"5445e400-5708-4089-ba16-77781b49d444\",\n        \"industryName\": \"Comercial Enterprise\",\n        \"vatRegistrationNumber\": \"API-TEST-12345678\",\n        \"bankId\": \"c0814cb5-6fd1-495d-9693-215e40a5a53f\",\n        \"branchId\": \"3fad6226-4ee9-45f2-8a09-0195c8ed97da\",\n        \"bankAccountNumber\": \"008900890089\",\n        \"documents\": [\n            {\n                \"fileName\": \"string\",\n                \"filePath\": \"string\",\n                \"type\": \"string\"\n            }\n        ],\n        \"fleetSize\": 10,\n        \"linkedinAccount\": \"testlinkedin.com\",\n        \"facebookAccount\": \"testfb.com\",\n        \"instagramAccount\": \"testinsta.com\",\n        \"status\": \"Pending\",\n        \"totalCards\": null\n    },\n    {\n        \"id\": \"77b90b9a-ebd2-4473-a310-b01b43b2c377\",\n        \"code\": \"005-F000642\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"API_Generated Customer_2\",\n        \"email\": \"apigeneratedcustomer2@yopmail.com\",\n        \"phoneNumber1\": \"01674646008\",\n        \"phoneNumber2\": \"01674646008\",\n        \"nationalId\": null,\n        \"addressLine1\": \"Api_addressLine1\",\n        \"addressLine2\": \"Api_addressLine2\",\n        \"contactPersonFirstName\": \"API Generated\",\n        \"contactPersonLastName\": \"Contact\",\n        \"contactPersonEmail\": \"apigeneratedcontact2@yopmail.com\",\n        \"city\": \"Soweto\",\n        \"cityId\": \"c645f0af-90d0-42f8-b1ba-35d3d584ca82\",\n        \"stateId\": \"7d63e0df-f476-4ba5-af7b-8af08201518e\",\n        \"zipCode\": \"1207\",\n        \"country\": \"Trinidad and Tobago\",\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"5445e400-5708-4089-ba16-77781b49d444\",\n        \"industryName\": \"Comercial Enterprise\",\n        \"vatRegistrationNumber\": \"API-TEST-12345678\",\n        \"bankId\": \"c0814cb5-6fd1-495d-9693-215e40a5a53f\",\n        \"branchId\": \"3fad6226-4ee9-45f2-8a09-0195c8ed97da\",\n        \"bankAccountNumber\": \"008900890089\",\n        \"documents\": [\n            {\n                \"fileName\": \"string\",\n                \"filePath\": \"string\",\n                \"type\": \"string\"\n            }\n        ],\n        \"fleetSize\": 10,\n        \"linkedinAccount\": \"testlinkedin.com\",\n        \"facebookAccount\": \"testfb.com\",\n        \"instagramAccount\": \"testinsta.com\",\n        \"status\": \"Pending\",\n        \"totalCards\": null\n    },\n    {\n        \"id\": \"faa26256-a456-4994-bd38-0059b0945ed7\",\n        \"code\": \"005-F000641\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"API_Generated Customer_3\",\n        \"email\": \"apigeneratedcustomer3@yopmail.com\",\n        \"phoneNumber1\": \"01674646008\",\n        \"phoneNumber2\": \"01674646008\",\n        \"nationalId\": null,\n        \"addressLine1\": \"Api_addressLine1\",\n        \"addressLine2\": \"Api_addressLine2\",\n        \"contactPersonFirstName\": \"API Generated\",\n        \"contactPersonLastName\": \"Contact\",\n        \"contactPersonEmail\": \"apigeneratedcontact3@yopmail.com\",\n        \"city\": \"Soweto\",\n        \"cityId\": \"c645f0af-90d0-42f8-b1ba-35d3d584ca82\",\n        \"stateId\": \"7d63e0df-f476-4ba5-af7b-8af08201518e\",\n        \"zipCode\": \"1207\",\n        \"country\": \"Trinidad and Tobago\",\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"5445e400-5708-4089-ba16-77781b49d444\",\n        \"industryName\": \"Comercial Enterprise\",\n        \"vatRegistrationNumber\": \"API-TEST-12345678\",\n        \"bankId\": \"c0814cb5-6fd1-495d-9693-215e40a5a53f\",\n        \"branchId\": \"3fad6226-4ee9-45f2-8a09-0195c8ed97da\",\n        \"bankAccountNumber\": \"008900890089\",\n        \"documents\": [\n            {\n                \"fileName\": \"string\",\n                \"filePath\": \"string\",\n                \"type\": \"string\"\n            }\n        ],\n        \"fleetSize\": 10,\n        \"linkedinAccount\": \"testlinkedin.com\",\n        \"facebookAccount\": \"testfb.com\",\n        \"instagramAccount\": \"testinsta.com\",\n        \"status\": \"Pending\",\n        \"totalCards\": null\n    },\n    {\n        \"id\": \"89fcb5ca-9251-402c-a176-1e760b994c04\",\n        \"code\": \"005-F000640\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"September 240903\",\n        \"email\": \"ca240903002@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"b408d7eb-e0e6-4706-a3fb-bee032cd6ec8\",\n        \"code\": \"005-F000639\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"September 240903\",\n        \"email\": \"ca240903002@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"cf23b4e5-09e4-4e70-aba0-5ab595b07226\",\n        \"code\": \"005-F000638\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"September 240903\",\n        \"email\": \"ca240903002@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"01f92f90-f80d-4126-9fde-3f9cdcd5437e\",\n        \"code\": \"005-F000637\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"API_Generated Customer_3\",\n        \"email\": \"apigeneratedcustomer3@yopmail.com\",\n        \"phoneNumber1\": \"01674646008\",\n        \"phoneNumber2\": \"01674646008\",\n        \"nationalId\": null,\n        \"addressLine1\": \"Api_addressLine1\",\n        \"addressLine2\": \"Api_addressLine2\",\n        \"contactPersonFirstName\": \"API Generated\",\n        \"contactPersonLastName\": \"Contact\",\n        \"contactPersonEmail\": \"apigeneratedcontact3@yopmail.com\",\n        \"city\": \"Soweto\",\n        \"cityId\": \"c645f0af-90d0-42f8-b1ba-35d3d584ca82\",\n        \"stateId\": \"7d63e0df-f476-4ba5-af7b-8af08201518e\",\n        \"zipCode\": \"1207\",\n        \"country\": \"Trinidad and Tobago\",\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"5445e400-5708-4089-ba16-77781b49d444\",\n        \"industryName\": \"Comercial Enterprise\",\n        \"vatRegistrationNumber\": \"API-TEST-12345678\",\n        \"bankId\": \"c0814cb5-6fd1-495d-9693-215e40a5a53f\",\n        \"branchId\": \"3fad6226-4ee9-45f2-8a09-0195c8ed97da\",\n        \"bankAccountNumber\": \"008900890089\",\n        \"documents\": [\n            {\n                \"fileName\": \"string\",\n                \"filePath\": \"string\",\n                \"type\": \"string\"\n            }\n        ],\n        \"fleetSize\": 10,\n        \"linkedinAccount\": \"testlinkedin.com\",\n        \"facebookAccount\": \"testfb.com\",\n        \"instagramAccount\": \"testinsta.com\",\n        \"status\": \"Pending\",\n        \"totalCards\": null\n    },\n    {\n        \"id\": \"58e74b6d-e3d0-47b9-881b-c54be809b9f9\",\n        \"code\": \"005-F000636\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"API_Generated Customer_3\",\n        \"email\": \"apigeneratedcustomer3@yopmail.com\",\n        \"phoneNumber1\": \"01674646008\",\n        \"phoneNumber2\": \"01674646008\",\n        \"nationalId\": null,\n        \"addressLine1\": \"Api_addressLine1\",\n        \"addressLine2\": \"Api_addressLine2\",\n        \"contactPersonFirstName\": \"API Generated\",\n        \"contactPersonLastName\": \"Contact\",\n        \"contactPersonEmail\": \"apigeneratedcontact3@yopmail.com\",\n        \"city\": \"Soweto\",\n        \"cityId\": \"c645f0af-90d0-42f8-b1ba-35d3d584ca82\",\n        \"stateId\": \"7d63e0df-f476-4ba5-af7b-8af08201518e\",\n        \"zipCode\": \"1207\",\n        \"country\": \"Trinidad and Tobago\",\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"5445e400-5708-4089-ba16-77781b49d444\",\n        \"industryName\": \"Comercial Enterprise\",\n        \"vatRegistrationNumber\": \"API-TEST-12345678\",\n        \"bankId\": \"c0814cb5-6fd1-495d-9693-215e40a5a53f\",\n        \"branchId\": \"3fad6226-4ee9-45f2-8a09-0195c8ed97da\",\n        \"bankAccountNumber\": \"008900890089\",\n        \"documents\": [\n            {\n                \"fileName\": \"string\",\n                \"filePath\": \"string\",\n                \"type\": \"string\"\n            }\n        ],\n        \"fleetSize\": 10,\n        \"linkedinAccount\": \"testlinkedin.com\",\n        \"facebookAccount\": \"testfb.com\",\n        \"instagramAccount\": \"testinsta.com\",\n        \"status\": \"Pending\",\n        \"totalCards\": null\n    },\n    {\n        \"id\": \"80e06e54-0b19-4ba7-859b-5c8c904b100e\",\n        \"code\": \"005-F000635\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"API_Generated Customer_2\",\n        \"email\": \"apigeneratedcustomer2@yopmail.com\",\n        \"phoneNumber1\": \"01674646008\",\n        \"phoneNumber2\": \"01674646008\",\n        \"nationalId\": null,\n        \"addressLine1\": \"Api_addressLine1\",\n        \"addressLine2\": \"Api_addressLine2\",\n        \"contactPersonFirstName\": \"API Generated\",\n        \"contactPersonLastName\": \"Contact\",\n        \"contactPersonEmail\": \"apigeneratedcontact2@yopmail.com\",\n        \"city\": \"Soweto\",\n        \"cityId\": \"c645f0af-90d0-42f8-b1ba-35d3d584ca82\",\n        \"stateId\": \"7d63e0df-f476-4ba5-af7b-8af08201518e\",\n        \"zipCode\": \"1207\",\n        \"country\": \"Trinidad and Tobago\",\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"5445e400-5708-4089-ba16-77781b49d444\",\n        \"industryName\": \"Comercial Enterprise\",\n        \"vatRegistrationNumber\": \"API-TEST-12345678\",\n        \"bankId\": \"c0814cb5-6fd1-495d-9693-215e40a5a53f\",\n        \"branchId\": \"3fad6226-4ee9-45f2-8a09-0195c8ed97da\",\n        \"bankAccountNumber\": \"008900890089\",\n        \"documents\": [\n            {\n                \"fileName\": \"string\",\n                \"filePath\": \"string\",\n                \"type\": \"string\"\n            }\n        ],\n        \"fleetSize\": 10,\n        \"linkedinAccount\": \"testlinkedin.com\",\n        \"facebookAccount\": \"testfb.com\",\n        \"instagramAccount\": \"testinsta.com\",\n        \"status\": \"Pending\",\n        \"totalCards\": null\n    },\n    {\n        \"id\": \"c497d0cf-1cdd-4c20-a695-af7c70235eff\",\n        \"code\": \"005-F000634\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"API_GeneratedCustomer1_631\",\n        \"email\": \"apigencustomer1189@yopmail.com\",\n        \"phoneNumber1\": \"01674646008\",\n        \"phoneNumber2\": \"01674646008\",\n        \"nationalId\": null,\n        \"addressLine1\": \"Api_addressLine1\",\n        \"addressLine2\": \"Api_addressLine2\",\n        \"contactPersonFirstName\": \"API Generated\",\n        \"contactPersonLastName\": \"Contact1\",\n        \"contactPersonEmail\": \"apigencontact1318@yopmail.com\",\n        \"city\": \"Soweto\",\n        \"cityId\": \"c645f0af-90d0-42f8-b1ba-35d3d584ca82\",\n        \"stateId\": \"7d63e0df-f476-4ba5-af7b-8af08201518e\",\n        \"zipCode\": \"1207\",\n        \"country\": \"Trinidad and Tobago\",\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"5445e400-5708-4089-ba16-77781b49d444\",\n        \"industryName\": \"Comercial Enterprise\",\n        \"vatRegistrationNumber\": \"API-TEST-12345678\",\n        \"bankId\": \"c0814cb5-6fd1-495d-9693-215e40a5a53f\",\n        \"branchId\": \"3fad6226-4ee9-45f2-8a09-0195c8ed97da\",\n        \"bankAccountNumber\": \"008900890089\",\n        \"documents\": [\n            {\n                \"fileName\": \"string\",\n                \"filePath\": \"string\",\n                \"type\": \"string\"\n            }\n        ],\n        \"fleetSize\": 10,\n        \"linkedinAccount\": \"testlinkedin.com\",\n        \"facebookAccount\": \"testfb.com\",\n        \"instagramAccount\": \"testinsta.com\",\n        \"status\": \"Pending\",\n        \"totalCards\": null\n    },\n    {\n        \"id\": \"44b51772-3259-43e4-ae93-e293bae22332\",\n        \"code\": \"005-F000633\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"September 240903\",\n        \"email\": \"ca240903002@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"f658667f-da0c-45bf-add9-09d61f678196\",\n        \"code\": \"005-F000420\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"API_Generated_Updated1\",\n        \"email\": \"apigencustomer1802@yopmail.com\",\n        \"phoneNumber1\": \"01674646008\",\n        \"phoneNumber2\": \"01674646008\",\n        \"nationalId\": null,\n        \"addressLine1\": \"Api_addressLine1\",\n        \"addressLine2\": \"Api_addressLine2\",\n        \"contactPersonFirstName\": \"API Generated\",\n        \"contactPersonLastName\": \"Contact_Updated1\",\n        \"contactPersonEmail\": \"apigencontact1259@yopmail.com\",\n        \"city\": \"Soweto\",\n        \"cityId\": \"c645f0af-90d0-42f8-b1ba-35d3d584ca82\",\n        \"stateId\": \"7d63e0df-f476-4ba5-af7b-8af08201518e\",\n        \"zipCode\": \"1207\",\n        \"country\": \"Trinidad and Tobago\",\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"5445e400-5708-4089-ba16-77781b49d444\",\n        \"industryName\": \"Comercial Enterprise\",\n        \"vatRegistrationNumber\": \"API-TEST-12345678\",\n        \"bankId\": \"c0814cb5-6fd1-495d-9693-215e40a5a53f\",\n        \"branchId\": \"3fad6226-4ee9-45f2-8a09-0195c8ed97da\",\n        \"bankAccountNumber\": \"008900890089\",\n        \"documents\": [\n            {\n                \"fileName\": \"string\",\n                \"filePath\": \"string\",\n                \"type\": \"string\"\n            }\n        ],\n        \"fleetSize\": 10,\n        \"linkedinAccount\": \"testlinkedin.com\",\n        \"facebookAccount\": \"testfb.com\",\n        \"instagramAccount\": \"testinsta.com\",\n        \"status\": \"Pending\",\n        \"totalCards\": null\n    },\n    {\n        \"id\": \"cdae3ab8-f136-4f58-a733-c5044c8b6975\",\n        \"code\": \"005-F000632\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"API_GeneratedCustomer1_218\",\n        \"email\": \"apigencustomer1802@yopmail.com\",\n        \"phoneNumber1\": \"01674646008\",\n        \"phoneNumber2\": \"01674646008\",\n        \"nationalId\": null,\n        \"addressLine1\": \"Api_addressLine1\",\n        \"addressLine2\": \"Api_addressLine2\",\n        \"contactPersonFirstName\": \"API Generated\",\n        \"contactPersonLastName\": \"Contact1\",\n        \"contactPersonEmail\": \"apigencontact1259@yopmail.com\",\n        \"city\": \"Soweto\",\n        \"cityId\": \"c645f0af-90d0-42f8-b1ba-35d3d584ca82\",\n        \"stateId\": \"7d63e0df-f476-4ba5-af7b-8af08201518e\",\n        \"zipCode\": \"1207\",\n        \"country\": \"Trinidad and Tobago\",\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"5445e400-5708-4089-ba16-77781b49d444\",\n        \"industryName\": \"Comercial Enterprise\",\n        \"vatRegistrationNumber\": \"API-TEST-12345678\",\n        \"bankId\": \"c0814cb5-6fd1-495d-9693-215e40a5a53f\",\n        \"branchId\": \"3fad6226-4ee9-45f2-8a09-0195c8ed97da\",\n        \"bankAccountNumber\": \"008900890089\",\n        \"documents\": [\n            {\n                \"fileName\": \"string\",\n                \"filePath\": \"string\",\n                \"type\": \"string\"\n            }\n        ],\n        \"fleetSize\": 10,\n        \"linkedinAccount\": \"testlinkedin.com\",\n        \"facebookAccount\": \"testfb.com\",\n        \"instagramAccount\": \"testinsta.com\",\n        \"status\": \"Pending\",\n        \"totalCards\": null\n    },\n    {\n        \"id\": \"eb82d78e-4a67-4ab7-84c8-84fce57e0824\",\n        \"code\": \"005-F000631\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"September 240903\",\n        \"email\": \"ca240903002@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"254d9705-7b66-4632-aae1-be29a2f19e0b\",\n        \"code\": \"005-F000630\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"September 240903\",\n        \"email\": \"ca240903002@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"5d5be774-ae16-4c94-a461-196061366832\",\n        \"code\": \"005-F000628\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"9a577959-9732-40b0-8afd-dc53b2b9e500\",\n        \"code\": \"005-F000627\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"5ff43ee9-64d5-4bbb-8ea1-d8e8ffe72dfb\",\n        \"code\": \"005-F000625\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"6c30ee19-32a2-4a00-acbf-ccddf3b6f4bf\",\n        \"code\": \"005-F000624\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"071f4c2b-d916-42a4-a088-01bfa6fb4ca4\",\n        \"code\": \"005-F000623\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"0bdd3144-b199-4c39-a8fa-9a92207a587e\",\n        \"code\": \"005-F000622\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"12121d55-d0b9-4806-9667-383d059b476e\",\n        \"code\": \"005-F000621\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"ea3d819a-d114-44e7-a82a-d1a50792c4e0\",\n        \"code\": \"005-F000620\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"25149538-e21c-4ae8-99a8-f1e65d6b5799\",\n        \"code\": \"005-F000619\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"d3a07eea-84ed-4a31-9382-ab869ab36eec\",\n        \"code\": \"005-F000618\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"36e7cba4-badb-4890-aa12-379cbffe5193\",\n        \"code\": \"005-F000617\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"6637d443-89ed-4d21-82ae-835ca0e699fa\",\n        \"code\": \"005-F000616\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"0df6b2e0-f7c9-451e-9e32-6a927a4ce63a\",\n        \"code\": \"005-F000615\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"8de0958c-1db9-4afb-aa1c-d7d3137b0f3d\",\n        \"code\": \"005-F000614\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"2afcd987-1560-4498-a5d9-a5bcf5f26833\",\n        \"code\": \"005-F000613\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"998f69e1-f12c-4edd-8161-a686bbc9305f\",\n        \"code\": \"005-F000612\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"0a29b999-73bd-4efc-b816-f59fc1663b49\",\n        \"code\": \"005-F000611\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test\",\n        \"email\": \"cpay@yopmail.com\",\n        \"phoneNumber1\": \"1868-1121212\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1212111111212121\",\n        \"addressLine1\": \"test\",\n        \"addressLine2\": \"test\",\n        \"contactPersonFirstName\": \"MD.\",\n        \"contactPersonLastName\": \"Shuvo\",\n        \"contactPersonEmail\": \"cpay01@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": \"1200\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"7d5e130e-57c0-421f-9309-6b8a35e3b257\",\n        \"industryName\": \"Building\",\n        \"vatRegistrationNumber\": \"1231\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": \"79dd3680-88b1-4d72-a3b4-fae5a2907b4e\",\n        \"bankAccountNumber\": \"12165432123456789\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"99db7a30-3a08-4803-a612-3ddac5488bae\",\n        \"code\": \"005-F000609\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"MD.\",\n        \"email\": \"abc@gmail.com\",\n        \"phoneNumber1\": \"1868-2134333\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1232123432123456\",\n        \"addressLine1\": \"asdasda\",\n        \"addressLine2\": \"asdaswd\",\n        \"contactPersonFirstName\": \"Rijvi\",\n        \"contactPersonLastName\": \"R\",\n        \"contactPersonEmail\": \"abc1@gmail.com\",\n        \"city\": \"Bamboo\",\n        \"cityId\": \"cebaa002-dbb3-48e7-aaba-c2f63308aa45\",\n        \"stateId\": null,\n        \"zipCode\": \"12222\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3c0a40d9-f1a3-4b4d-be82-28ae3f4f52db\",\n        \"industryName\": \"Accommodation and Food Services\",\n        \"vatRegistrationNumber\": \"121212\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": null,\n        \"bankAccountNumber\": \"32324e234234\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 1,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 1\n    },\n    {\n        \"id\": \"4bab8bb5-5c5c-4d71-835e-5bb752e620ed\",\n        \"code\": \"005-F000608\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"MD.\",\n        \"email\": \"abc@gmail.com\",\n        \"phoneNumber1\": \"1868-2134333\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"1232123432123456\",\n        \"addressLine1\": \"asdasda\",\n        \"addressLine2\": \"asdaswd\",\n        \"contactPersonFirstName\": \"Rijvi\",\n        \"contactPersonLastName\": \"R\",\n        \"contactPersonEmail\": \"abc1@gmail.com\",\n        \"city\": \"Bamboo\",\n        \"cityId\": \"cebaa002-dbb3-48e7-aaba-c2f63308aa45\",\n        \"stateId\": null,\n        \"zipCode\": \"12222\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3c0a40d9-f1a3-4b4d-be82-28ae3f4f52db\",\n        \"industryName\": \"Accommodation and Food Services\",\n        \"vatRegistrationNumber\": \"121212\",\n        \"bankId\": \"f85e3e16-15b3-4aa5-bc31-99c5af2de4a9\",\n        \"branchId\": null,\n        \"bankAccountNumber\": \"32324e234234\",\n        \"documents\": [\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"IMG_20190419_190940_288.jpg\",\n                \"filePath\": \"customer-document/IMG_20190419_190940_288.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 1,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 1\n    },\n    {\n        \"id\": \"e2acfd36-d040-43f5-881c-3e6766fe7d21\",\n        \"code\": \"005-F000607\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"September 240903\",\n        \"email\": \"ca240903002@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"ff9a0842-d0bf-4b94-92ce-c27424da3ce5\",\n        \"code\": \"005-F000606\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"September 240903\",\n        \"email\": \"ca240903002@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"b06b8ccf-05d2-427e-93f7-708073efb416\",\n        \"code\": \"005-F000605\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"September 240903\",\n        \"email\": \"ca240903002@yopmail.com\",\n        \"phoneNumber1\": \"1868-8974564\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"789532546654\",\n        \"addressLine1\": \"Mirpur-1, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 240903001\",\n        \"contactPersonLastName\": \"LN 240903001\",\n        \"contactPersonEmail\": \"cea240903002@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240903001\",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"4cf1d67d-9a70-4e0d-a7f4-9673ef181daf\",\n        \"code\": \"005-F000567\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test sdssd\",\n        \"email\": \"ceahanif@yopmail.com\",\n        \"phoneNumber1\": \"1868-5648545\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"6545665\",\n        \"addressLine1\": \"ewrewrewr\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"dfds\",\n        \"contactPersonLastName\": \"dfdsf\",\n        \"contactPersonEmail\": \"ca@yopmail.com\",\n        \"city\": \"Arouca\",\n        \"cityId\": \"0d5c9e6b-572f-45f9-97ba-43808ed38431\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"d0681aa6-dbe6-4a35-bac8-351853bc277f\",\n        \"industryName\": \"Arts, Entertainment, and Recreation\",\n        \"vatRegistrationNumber\": \"43543dsfgd\",\n        \"bankId\": null,\n        \"branchId\": null,\n        \"bankAccountNumber\": null,\n        \"documents\": [\n            {\n                \"fileName\": \"benefit_3.png\",\n                \"filePath\": \"customer-document/benefit_3.png\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"Cheque Sample 005.jpg\",\n                \"filePath\": \"customer-document/Cheque Sample 005.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 10,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 115\n    },\n    {\n        \"id\": \"0e67f804-0348-48e2-8d10-d662e8e31372\",\n        \"code\": \"005-F000547\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"September 2402\",\n        \"email\": \"cea240902001@yopmail.com\",\n        \"phoneNumber1\": \"1868-6545646\",\n        \"phoneNumber2\": \"1868-6565656\",\n        \"nationalId\": \"987563211654\",\n        \"addressLine1\": \"Mirpu-1, Dhaka\",\n        \"addressLine2\": \"Test 1 by Send Back\",\n        \"contactPersonFirstName\": \"FN 240902001\",\n        \"contactPersonLastName\": \"LN 240902001\",\n        \"contactPersonEmail\": \"ca240902001@yopmail.com\",\n        \"city\": \"Balmain\",\n        \"cityId\": \"34cc237e-22bb-433f-9f7d-305563eaae50\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\n        \"industryName\": \"Cargo Transportation\",\n        \"vatRegistrationNumber\": \"VRN 240902001\",\n        \"bankId\": \"c68fe1ee-81dc-4a6e-ae2f-f3b2b4ee4db7\",\n        \"branchId\": \"d3c45693-8971-4d20-9bf6-27349c0178df\",\n        \"bankAccountNumber\": \"4005006000600\",\n        \"documents\": [\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 5,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"dc39ebfa-a1ac-41af-a58b-5fc671ddf3f8\",\n        \"code\": \"005-C000016\",\n        \"type\": \"CONSUMER_CUSTOMER\",\n        \"name\": \"test 5\",\n        \"email\": \"company_test1212@yopmail.com\",\n        \"phoneNumber1\": \"1868-1232424\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"12312312\",\n        \"addressLine1\": \"dhaka\",\n        \"addressLine2\": \"dhaka\",\n        \"contactPersonFirstName\": \"test\",\n        \"contactPersonLastName\": \"5\",\n        \"contactPersonEmail\": \"company_test1212@yopmail.com\",\n        \"city\": \"Balmain\",\n        \"cityId\": \"34cc237e-22bb-433f-9f7d-305563eaae50\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": null,\n        \"industryName\": null,\n        \"vatRegistrationNumber\": null,\n        \"bankId\": null,\n        \"branchId\": null,\n        \"bankAccountNumber\": null,\n        \"documents\": [\n            {\n                \"fileName\": \"user1.PNG\",\n                \"filePath\": \"customer-document/user1.PNG\",\n                \"type\": \"miscellaneous\"\n            },\n            {\n                \"fileName\": \"user1.PNG\",\n                \"filePath\": \"customer-document/user1.PNG\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 1,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 1\n    },\n    {\n        \"id\": \"2732a550-4446-41d6-b9e6-b5897f40601a\",\n        \"code\": \"005-F000545\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"Test Ajhjhh\",\n        \"email\": \"company_test121@yopmail.com\",\n        \"phoneNumber1\": \"1868-1231232\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"123113212\",\n        \"addressLine1\": \"ctg\",\n        \"addressLine2\": \"ctg\",\n        \"contactPersonFirstName\": \"2321\",\n        \"contactPersonLastName\": \"12312\",\n        \"contactPersonEmail\": \"company_test12@yopmail.com\",\n        \"city\": \"Arouca\",\n        \"cityId\": \"0d5c9e6b-572f-45f9-97ba-43808ed38431\",\n        \"stateId\": null,\n        \"zipCode\": \"2323\",\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"5445e400-5708-4089-ba16-77781b49d444\",\n        \"industryName\": \"Comercial Enterprise\",\n        \"vatRegistrationNumber\": \"123123123\",\n        \"bankId\": \"2a3643a3-16fe-4aae-b5e5-a5407ace1b0b\",\n        \"branchId\": \"8999f225-5f78-41a5-8043-4b8bd0800f9a\",\n        \"bankAccountNumber\": \"132123123123213\",\n        \"documents\": [\n            {\n                \"fileName\": \"user1.PNG\",\n                \"filePath\": \"customer-document/user1.PNG\",\n                \"type\": \"vat\"\n            },\n            {\n                \"fileName\": \"user1.PNG\",\n                \"filePath\": \"customer-document/user1.PNG\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"user1.PNG\",\n                \"filePath\": \"customer-document/user1.PNG\",\n                \"type\": \"miscellaneous\"\n            },\n            {\n                \"fileName\": \"user1.PNG\",\n                \"filePath\": \"customer-document/user1.PNG\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"86a68f15-2402-4f04-9c2e-6ed0c3db8d47\",\n        \"code\": \"005-F000540\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"September 07001\",\n        \"email\": \"ce070921001@yopmail.com\",\n        \"phoneNumber1\": \"1868-6545645\",\n        \"phoneNumber2\": \"1868-5645654\",\n        \"nationalId\": \"457544856456\",\n        \"addressLine1\": \"Mirpur, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 070921001\",\n        \"contactPersonLastName\": \"LN 070921001\",\n        \"contactPersonEmail\": \"cea070921001@yopmail.com\",\n        \"city\": \"Gonzales\",\n        \"cityId\": \"e7f98baf-89a8-40cb-ba44-eae14c794162\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3c91b1ec-ca86-4e3e-90e9-2512b64a2e39\",\n        \"industryName\": \"Agriculture, Forestry, Fishing and Hunting\",\n        \"vatRegistrationNumber\": \"VRN 070921001\",\n        \"bankId\": null,\n        \"branchId\": null,\n        \"bankAccountNumber\": null,\n        \"documents\": [\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 6,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 4\n    },\n    {\n        \"id\": \"384c35a9-25ae-4dd7-9e41-30db07028008\",\n        \"code\": \"005-F000543\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"jihad\",\n        \"email\": \"jihadtest1@yopmail.com\",\n        \"phoneNumber1\": \"1868-2342342\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"234234\",\n        \"addressLine1\": \"tst\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"asdf\",\n        \"contactPersonLastName\": \"asdf\",\n        \"contactPersonEmail\": \"jihadtest2@yopmail.com\",\n        \"city\": \"Agostini\",\n        \"cityId\": \"994201e4-e483-495a-a818-1496789d6ae9\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"3c0a40d9-f1a3-4b4d-be82-28ae3f4f52db\",\n        \"industryName\": \"Accommodation and Food Services\",\n        \"vatRegistrationNumber\": \"adsfasdf\",\n        \"bankId\": null,\n        \"branchId\": null,\n        \"bankAccountNumber\": null,\n        \"documents\": [\n            {\n                \"fileName\": \"download (1).jfif\",\n                \"filePath\": \"customer-document/download (1).jfif\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"download (1).jfif\",\n                \"filePath\": \"customer-document/download (1).jfif\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 343,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 343\n    },\n    {\n        \"id\": \"c67c102a-abf6-4c78-b712-1b50ef3f5849\",\n        \"code\": \"005-C000014\",\n        \"type\": \"CONSUMER_CUSTOMER\",\n        \"name\": \"Jihad hasan\",\n        \"email\": \"jihadhasantest@yopmail.com\",\n        \"phoneNumber1\": \"1868-2342342\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"234444444444444\",\n        \"addressLine1\": \"dadf\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"Jihad\",\n        \"contactPersonLastName\": \"hasan\",\n        \"contactPersonEmail\": \"jihadhasantest@yopmail.com\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": null,\n        \"industryName\": null,\n        \"vatRegistrationNumber\": \" \",\n        \"bankId\": null,\n        \"branchId\": null,\n        \"bankAccountNumber\": null,\n        \"documents\": [\n            {\n                \"fileName\": \"download (1).jfif\",\n                \"filePath\": \"customer-document/download (1).jfif\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 24,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 24\n    },\n    {\n        \"id\": \"e4e4d1d8-38b7-4e80-9cc4-49f250a1e61a\",\n        \"code\": \"005-F000535\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"August 08\",\n        \"email\": \"ce080802001@yopmail.com\",\n        \"phoneNumber1\": \"1868-4564546\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"564564565465452\",\n        \"addressLine1\": \"Mirpur, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"FN 080802001\",\n        \"contactPersonLastName\": \"LN 080802001\",\n        \"contactPersonEmail\": \"cea080802001@yopmail.com\",\n        \"city\": \"Saint James\",\n        \"cityId\": \"0f7d55ec-911e-429d-b1a4-9c7d405fd487\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"5445e400-5708-4089-ba16-77781b49d444\",\n        \"industryName\": \"Comercial Enterprise\",\n        \"vatRegistrationNumber\": \"VRN 080802001\",\n        \"bankId\": \"b44dd6a4-c685-4b84-b462-c7d960e7ec01\",\n        \"branchId\": \"4b8d8a76-9cad-492f-8d5a-6ae2bda577e1\",\n        \"bankAccountNumber\": \"4005006000600\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            },\n            {\n                \"fileName\": \"Business Registration.jpg\",\n                \"filePath\": \"customer-document/Business Registration.jpg\",\n                \"type\": \"article\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 3\n    },\n    {\n        \"id\": \"fb46df1f-f50c-4883-a54c-c05ca153d39f\",\n        \"code\": \"005-C000007\",\n        \"type\": \"CONSUMER_CUSTOMER\",\n        \"name\": \"Hilel Juwain Nassar\",\n        \"email\": \"juwain@yopmail.com\",\n        \"phoneNumber1\": \"1868-5646546\",\n        \"phoneNumber2\": \"\",\n        \"nationalId\": \"5464865445687\",\n        \"addressLine1\": \"Mirpur, Dhaka\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"Hilel Juwain\",\n        \"contactPersonLastName\": \"Nassar\",\n        \"contactPersonEmail\": \"juwain@yopmail.com\",\n        \"city\": \"Woodland\",\n        \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": null,\n        \"industryName\": null,\n        \"vatRegistrationNumber\": \" \",\n        \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\n        \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\n        \"bankAccountNumber\": \"4008008000800\",\n        \"documents\": [\n            {\n                \"fileName\": \"Proof of Address.jpg\",\n                \"filePath\": \"customer-document/Proof of Address.jpg\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 4,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    },\n    {\n        \"id\": \"42976706-ad41-46ef-8cf7-3f0c798de4d5\",\n        \"code\": \"005-C000003\",\n        \"type\": \"CONSUMER_CUSTOMER\",\n        \"name\": \"234234 234234\",\n        \"email\": \"ASDFAS@OUTLOOK.COM\",\n        \"phoneNumber1\": \"234234234\",\n        \"phoneNumber2\": null,\n        \"nationalId\": \"ASFASDF\",\n        \"addressLine1\": \"342\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"234234\",\n        \"contactPersonLastName\": \"234234\",\n        \"contactPersonEmail\": \"ASDFAS@OUTLOOK.COM\",\n        \"city\": \"Anse Noire\",\n        \"cityId\": \"5ce465e5-e7db-4ed8-be22-785f65f8c7b0\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": null,\n        \"industryName\": null,\n        \"vatRegistrationNumber\": \" \",\n        \"bankId\": null,\n        \"branchId\": null,\n        \"bankAccountNumber\": null,\n        \"documents\": [\n            {\n                \"fileName\": \"download (1).png\",\n                \"filePath\": \"customer-document/download (1).png\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 12,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 12\n    },\n    {\n        \"id\": \"41422f89-917c-487a-8992-67d62e259eba\",\n        \"code\": \"005-F000530\",\n        \"type\": \"FLEET_CUSTOMER\",\n        \"name\": \"dssfds cpny name\",\n        \"email\": \"sfsf@fsdfs.sfsdf\",\n        \"phoneNumber1\": \"2232312\",\n        \"phoneNumber2\": null,\n        \"nationalId\": \"12\",\n        \"addressLine1\": \"2323\",\n        \"addressLine2\": null,\n        \"contactPersonFirstName\": \"sdafda contc\",\n        \"contactPersonLastName\": \"sfsf info\",\n        \"contactPersonEmail\": \"sdfssfs@sfsf.sfsd\",\n        \"city\": \"Agostini\",\n        \"cityId\": \"994201e4-e483-495a-a818-1496789d6ae9\",\n        \"stateId\": null,\n        \"zipCode\": null,\n        \"country\": null,\n        \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\n        \"industryId\": \"5445e400-5708-4089-ba16-77781b49d444\",\n        \"industryName\": \"Comercial Enterprise\",\n        \"vatRegistrationNumber\": \"12121\",\n        \"bankId\": null,\n        \"branchId\": null,\n        \"bankAccountNumber\": null,\n        \"documents\": [\n            {\n                \"fileName\": \"bg_1.png\",\n                \"filePath\": \"customer-document/bg_1.png\",\n                \"type\": \"article\"\n            },\n            {\n                \"fileName\": \"bg_1.png\",\n                \"filePath\": \"customer-document/bg_1.png\",\n                \"type\": \"proof\"\n            }\n        ],\n        \"fleetSize\": 2,\n        \"linkedinAccount\": null,\n        \"facebookAccount\": null,\n        \"instagramAccount\": null,\n        \"status\": \"Pending\",\n        \"totalCards\": 2\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "reject registration",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Delete customer registration - SUCCESSFUL\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"action\": \"REJECT\",\r\n  \"object\": {}\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cpay-gateway-base-url-customer}}registrations/{{customer_id}}/command",
+									"host": [
+										"{{cpay-gateway-base-url-customer}}registrations"
+									],
+									"path": [
+										"{{customer_id}}",
+										"command"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "reject registration",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"action\": \"REJECT\",\r\n  \"object\": {}\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{cpay-gateway-base-url-customer}}registrations/{{customer_id}}/command",
+											"host": [
+												"{{cpay-gateway-base-url-customer}}registrations"
+											],
+											"path": [
+												"{{customer_id}}",
+												"command"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "0"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 Oct 2021 12:05:54 GMT"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "approve registration",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Approve customer registration request successful\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"action\": \"APPROVE\",\r\n  \"object\": {}\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cpay-gateway-base-url-customer}}registrations/{{customer_id}}/command",
+									"host": [
+										"{{cpay-gateway-base-url-customer}}registrations"
+									],
+									"path": [
+										"{{customer_id}}",
+										"command"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "approve registration",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"action\": \"APPROVE\",\r\n  \"object\": {}\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{cpay-gateway-base-url-customer}}registrations/{{customer_id}}/command",
+											"host": [
+												"{{cpay-gateway-base-url-customer}}registrations"
+											],
+											"path": [
+												"{{customer_id}}",
+												"command"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "0"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 Oct 2021 12:02:10 GMT"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "send back registration",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Sendback customer registration request successful\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"action\": \"SEND_BACK\",\r\n  \"object\": {}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cpay-gateway-base-url-customer}}registrations/{{customer_id}}/command",
+									"host": [
+										"{{cpay-gateway-base-url-customer}}registrations"
+									],
+									"path": [
+										"{{customer_id}}",
+										"command"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "send back registration",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"action\": \"SEND_BACK\",\r\n  \"object\": {}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{cpay-gateway-base-url-customer}}registrations/{{customer_id}}/command",
+											"host": [
+												"{{cpay-gateway-base-url-customer}}registrations"
+											],
+											"path": [
+												"{{customer_id}}",
+												"command"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "0"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 Oct 2021 11:58:06 GMT"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "Send back & resubmit",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Rijvi Ahmed Akash\",\r\n    \"email\": \"RijviAhmed18@yopmail.com\",\r\n    \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\r\n    \"vatRegistrationNumber\": \"VRN 240903001\",\r\n    \"fleetSize\": 20,\r\n    \"totalCards\": 10,\r\n    \"contactPersonFirstName\": \"FN 240903001\",\r\n    \"contactPersonLastName\": \"LN 240903001\",\r\n    \"contactPersonEmail\": \"cea240903002@yopmail.com\",\r\n    \"phoneNumber1\": \"1868-8974564\",\r\n    \"phoneNumber2\": \"\",\r\n    \"nationalId\": \"789532546654\",\r\n    \"facebookAccount\": null,\r\n    \"instagramAccount\": null,\r\n    \"linkedinAccount\": null,\r\n    \"documents\": [\r\n        {\r\n            \"fileName\": \"Business Registration.jpg\",\r\n            \"filePath\": \"customer-document/Business Registration.jpg\",\r\n            \"type\": \"article\"\r\n        },\r\n        {\r\n            \"fileName\": \"Proof of Address.jpg\",\r\n            \"filePath\": \"customer-document/Proof of Address.jpg\",\r\n            \"type\": \"proof\"\r\n        }\r\n    ],\r\n    \"firstFile\": [\r\n        {\r\n            \"fileName\": \"Business Registration.jpg\",\r\n            \"filePath\": \"customer-document/Business Registration.jpg\",\r\n            \"type\": \"article\"\r\n        }\r\n    ],\r\n    \"secondFile\": null,\r\n    \"thirdFile\": [\r\n        {\r\n            \"fileName\": \"Proof of Address.jpg\",\r\n            \"filePath\": \"customer-document/Proof of Address.jpg\",\r\n            \"type\": \"proof\"\r\n        }\r\n    ],\r\n    \"fourthFile\": null,\r\n    \"addressLine1\": \"Mirpur-1, Dhaka\",\r\n    \"addressLine2\": null,\r\n    \"zipCode\": null,\r\n    \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\r\n    \"city\": \"Woodland\",\r\n    \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\r\n    \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\r\n    \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\r\n    \"bankAccountNumber\": \"4008008000800\",\r\n    \"termsAndCondition\": true,\r\n    \"bankName\": \"The Central Bank of Trinidad and Tobago\",\r\n    \"branchName\": \"Port of Spain\",\r\n    \"type\": \"FLEET_CUSTOMER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cpay-gateway-base-url-customer}}registrations/{{customer_id}}",
+									"host": [
+										"{{cpay-gateway-base-url-customer}}registrations"
+									],
+									"path": [
+										"{{customer_id}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Send back & resubmit",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Rijvi Ahmed Akash\",\r\n    \"email\": \"RijviAhmed18@yopmail.com\",\r\n    \"industryId\": \"3a34b175-7ec6-4cc0-9005-3bed6649396b\",\r\n    \"vatRegistrationNumber\": \"VRN 240903001\",\r\n    \"fleetSize\": 20,\r\n    \"totalCards\": 10,\r\n    \"contactPersonFirstName\": \"FN 240903001\",\r\n    \"contactPersonLastName\": \"LN 240903001\",\r\n    \"contactPersonEmail\": \"cea240903002@yopmail.com\",\r\n    \"phoneNumber1\": \"1868-8974564\",\r\n    \"phoneNumber2\": \"\",\r\n    \"nationalId\": \"789532546654\",\r\n    \"facebookAccount\": null,\r\n    \"instagramAccount\": null,\r\n    \"linkedinAccount\": null,\r\n    \"documents\": [\r\n        {\r\n            \"fileName\": \"Business Registration.jpg\",\r\n            \"filePath\": \"customer-document/Business Registration.jpg\",\r\n            \"type\": \"article\"\r\n        },\r\n        {\r\n            \"fileName\": \"Proof of Address.jpg\",\r\n            \"filePath\": \"customer-document/Proof of Address.jpg\",\r\n            \"type\": \"proof\"\r\n        }\r\n    ],\r\n    \"firstFile\": [\r\n        {\r\n            \"fileName\": \"Business Registration.jpg\",\r\n            \"filePath\": \"customer-document/Business Registration.jpg\",\r\n            \"type\": \"article\"\r\n        }\r\n    ],\r\n    \"secondFile\": null,\r\n    \"thirdFile\": [\r\n        {\r\n            \"fileName\": \"Proof of Address.jpg\",\r\n            \"filePath\": \"customer-document/Proof of Address.jpg\",\r\n            \"type\": \"proof\"\r\n        }\r\n    ],\r\n    \"fourthFile\": null,\r\n    \"addressLine1\": \"Mirpur-1, Dhaka\",\r\n    \"addressLine2\": null,\r\n    \"zipCode\": null,\r\n    \"countryId\": \"d0aab078-94ff-4adf-8fbd-0736a7e406f8\",\r\n    \"city\": \"Woodland\",\r\n    \"cityId\": \"bee4164a-fc4d-4deb-b93e-849fcf98f00e\",\r\n    \"bankId\": \"69402aa8-0469-44f7-9430-754c2a24d2d3\",\r\n    \"branchId\": \"3e94d5c2-f8db-441d-bb44-49ca8897544f\",\r\n    \"bankAccountNumber\": \"4008008000800\",\r\n    \"termsAndCondition\": true,\r\n    \"bankName\": \"The Central Bank of Trinidad and Tobago\",\r\n    \"branchName\": \"Port of Spain\",\r\n    \"type\": \"FLEET_CUSTOMER\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{cpay-gateway-base-url-customer}}registrations/{{customer_id}}",
+											"host": [
+												"{{cpay-gateway-base-url-customer}}registrations"
+											],
+											"path": [
+												"{{customer_id}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "0"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 22 Oct 2021 12:01:39 GMT"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{cpay-bearer-token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
